@@ -1,12 +1,24 @@
 package streamguard.ingestservice.controller;
 
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import streamguard.ingestservice.model.CommentDto;
+import streamguard.ingestservice.service.CommentHandlerService;
 
 @RestController
-public class IngestController {
+@RequiredArgsConstructor
+public class CommentHandlerController {
 
-    @PostMapping
-    ResponseEntity<>
+    private final CommentHandlerService commentHandlerService;
+
+    @PostMapping("v1/comments")
+    ResponseEntity<String> handleComments(@Valid @RequestBody CommentDto comment) {
+        return ResponseEntity.ok(commentHandlerService.handleComment(comment));
+    }
+
+
 }
