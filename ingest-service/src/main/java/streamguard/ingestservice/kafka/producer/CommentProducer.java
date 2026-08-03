@@ -13,7 +13,7 @@ public class CommentProducer {
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
     public void send(String key, Object message) {
-        kafkaTemplate.send("comments", key, message)
+        kafkaTemplate.send("comments.incoming", key, message)
                 .whenComplete((result, ex) -> {
                     if (ex != null) {
                         log.error("Не удалось отправить в Kafka: {}", ex.getMessage());
